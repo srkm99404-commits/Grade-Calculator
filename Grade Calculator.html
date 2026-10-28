@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grade Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 8px;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Student Grade Calculator</h2>
+
+        <input type="number" id="m1" placeholder="Subject 1 Marks">
+        <input type="number" id="m2" placeholder="Subject 2 Marks">
+        <input type="number" id="m3" placeholder="Subject 3 Marks">
+        <input type="number" id="m4" placeholder="Subject 4 Marks">
+        <input type="number" id="m5" placeholder="Subject 5 Marks">
+
+        <br><br>
+
+        <button onclick="calculateGrade()">Calculate Grade</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            let m1 = document.getElementById("m1").value;
+            let m2 = document.getElementById("m2").value;
+            let m3 = document.getElementById("m3").value;
+            let m4 = document.getElementById("m4").value;
+            let m5 = document.getElementById("m5").value;
+
+            let marks = [m1, m2, m3, m4, m5];
+
+            
+            for (let i = 0; i < marks.length; i++) {
+                if (marks[i] === "" || Number(marks[i]) < 0 ||
+                    Number(marks[i]) > 100) {
+                    document.getElementById("result").innerHTML =
+                        "Please enter marks between 0 and 100 for all subjects.";
+                    return;
+                }
+            }
+
+            m1 = Number(m1);
+            m2 = Number(m2);
+            m3 = Number(m3);
+            m4 = Number(m4);
+            m5 = Number(m5);
+
+            let total = m1 + m2 + m3 + m4 + m5;
+            let average = total / 5;
+            let percentage = (total / 500) * 100;
+            let grade;
+
+            
+            if (percentage >= 90) {
+                grade = "A+";
+            } else if (percentage >= 80) {
+                grade = "A";
+            } else if (percentage >= 70) {
+                grade = "B";
+            } else if (percentage >= 60) {
+                grade = "C";
+            } else if (percentage >= 50) {
+                grade = "D";
+            } else {
+                grade = "F (Fail)";
+            }
+
+            document.getElementById("result").innerHTML =
+                "<h3>Result</h3>" +
+                "Total Marks: " + total + " / 500<br>" +
+                "Average: " + average.toFixed(2) + "<br>" +
+                "Percentage: " + percentage.toFixed(2) + "%<br>" +
+                "Grade: " + grade;
+        }
+    </script>
+
+</body>
+</html>
